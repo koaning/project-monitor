@@ -1,3 +1,4 @@
+import time 
 import requests
 import yaml
 import os
@@ -109,14 +110,15 @@ projects = get_projects()
 # authenticated = 30
 # Core API: 60 / minute
 # authenticated = 5000
-if len(projects) * 3 > 30:
-    raise NotImplementedError(
-        "We use 3 search API requests per request. The rate limit is 30 / minute. Implement a wait."
-    )
+# if len(projects) * 3 > 30:
+#     raise NotImplementedError(
+#         "We use 3 search API requests per request. The rate limit is 30 / minute. Implement a wait."
+#     )
 
 
 data = []
 for p in projects:
+    time.sleep(20)
     user, repo = p.split("/")
 
     # Check API rate limits
