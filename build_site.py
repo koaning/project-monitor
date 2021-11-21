@@ -138,7 +138,7 @@ for p in projects:
     project["user"] = user
     project["repo"] = repo
     project["release"] = get_core_api(user, repo, "releases/latest")
-    print(f"project {repo} is released at {project["release"].get("published_at")}")
+    print(f"project {repo} is released at {project['release'].get('published_at')}")
     project["published_at_timestamp"] = date_string_to_unix_timestamp(project["release"].get("published_at"))
     project["contributors"] = get_core_api(user, repo, "contributors")
     project["stats"] = get_core_api(user, repo, "")
