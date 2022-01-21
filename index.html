@@ -1,0 +1,924 @@
+<html>
+    
+
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <script src="js/timeago.min.js" type="text/javascript"></script>
+
+    <!-- load jQuery and tablesorter scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" integrity="sha512-qzgd5cYSZcosqpzpn7zF2ZId8f/8CHmFKZ8j7mU4OUXTNRd5g+ZHBPsgKEwoqxCtdQvExE5LprwwPAgoicguNg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function(event) {
+        
+        // Init tablesorter
+        $(function() {
+            $("#projectsTable").tablesorter({
+                sortList : [[4,1]]  // initial sort on Downloads columns 
+            });
+        });
+
+        // Init timeago
+        const nodes = document.querySelectorAll('.timeago');
+        timeago.render(nodes);
+
+    })
+    </script>    
+
+    <link href="css/tailwind.css" rel="stylesheet">
+
+    <style>
+        .tablesorter-header {
+            background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+            background-position: center right;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            white-space: normal;
+        }
+        .tablesorter-headerAsc {
+            background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+        }
+        .tablesorter-headerDesc {
+            background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+        }
+        .tablesorter .sorter-false {
+            background-image: none;
+            cursor: default;
+            /* padding: 4px; */
+        }
+    </style>
+
+</head>
+
+<body>
+
+<!-- component -->
+<!-- adapted from https://tailwindcomponents.com/component/projects-table -->
+<div class="overflow-x-auto">
+    <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+        <div class="w-full lg:w-5/6">
+            <h1 class="text-3xl bg-gray-100 font-sans">My open source projects</h1>
+            <div class="bg-white shadow-md rounded my-6">
+                <table class="min-w-max w-full table-auto tablesorter" id="projectsTable">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Project</th>
+                            <th class="py-3 px-6 text-left">Last release</th>
+                            <th class="py-3 px-6 text-center">Contributors</th>
+                            <th class="py-3 px-6 text-center">Build status</th>
+                            <th class="py-3 px-6 text-center">Downloads</th>
+                            <th class="py-3 px-6 text-center">Issues</th>
+                            <th class="py-3 px-6 text-center">PRs</th>
+                            <th class="py-3 px-6 text-center">Stars</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/scikit-lego" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">scikit-lego</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1639049668</span>
+                                <a href="https://github.com/koaning/scikit-lego/releases/tag/0.6.9" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.6.9</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-12-09T11:34:28Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/3510863?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1184396?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/10976353?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/932327?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/49157844?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1919110?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/15717930?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/scikit-lego/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">30</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/scikit-lego/workflows/Python%20Package%20Windows/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">20391</span>
+                                <a href="https://pepy.tech/badge/scikit-lego">
+                                    <img src="https://pepy.tech/badge/scikit-lego/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/scikit-lego/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">29</a>
+                                (<a href="https://github.com/koaning/scikit-lego/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">233</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/scikit-lego/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>
+                                (<a href="https://github.com/koaning/scikit-lego/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">261</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/scikit-lego/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">685</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/human-learn" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">human-learn</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1619026118</span>
+                                <a href="https://github.com/koaning/human-learn/releases/tag/0.2.5" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.2.5</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-04-21T17:28:38Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/24829397?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/589279?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/22837350?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/62802289?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/human-learn/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">5</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/human-learn/workflows/Python%20package/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">811</span>
+                                <a href="https://pepy.tech/badge/human-learn">
+                                    <img src="https://pepy.tech/badge/human-learn/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/human-learn/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">7</a>
+                                (<a href="https://github.com/koaning/human-learn/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">36</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/human-learn/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/human-learn/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">37</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/human-learn/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">557</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    RasaHQ/<span class="font-medium"><a href="https://github.com/RasaHQ/whatlies" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">whatlies</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1637102214</span>
+                                <a href="https://github.com/RasaHQ/whatlies/releases/tag/0.6.5" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.6.5</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-11-16T22:36:54Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/8656825?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/480884?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/7823843?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/26546344?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/11808903?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/73520373?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/48047085?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/RasaHQ/whatlies/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">12</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/RasaHQ/whatlies/workflows/Style%20Check/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">2872</span>
+                                <a href="https://pepy.tech/badge/whatlies">
+                                    <img src="https://pepy.tech/badge/whatlies/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/RasaHQ/whatlies/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">28</a>
+                                (<a href="https://github.com/RasaHQ/whatlies/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">136</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/RasaHQ/whatlies/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/RasaHQ/whatlies/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">188</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/whatlies/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">326</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/doubtlab" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">doubtlab</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1640075079</span>
+                                <a href="https://github.com/koaning/doubtlab/releases/tag/0.1.5" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.5</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-12-21T08:24:39Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/10201242?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/42817048?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/932327?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/180401?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/doubtlab/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">5</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/doubtlab/workflows/pages-build-deployment/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">1258</span>
+                                <a href="https://pepy.tech/badge/doubtlab">
+                                    <img src="https://pepy.tech/badge/doubtlab/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/doubtlab/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">6</a>
+                                (<a href="https://github.com/koaning/doubtlab/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">16</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/doubtlab/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/doubtlab/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">22</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/doubtlab/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">271</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/simsity" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">simsity</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1636029342</span>
+                                <a href="https://github.com/koaning/simsity/releases/tag/0.1.1" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.1</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-11-04T12:35:42Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/4321675?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/14034784?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/simsity/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">3</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/simsity/workflows/pages-build-deployment/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">706</span>
+                                <a href="https://pepy.tech/badge/simsity">
+                                    <img src="https://pepy.tech/badge/simsity/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/simsity/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">3</a>
+                                (<a href="https://github.com/koaning/simsity/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">12</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/simsity/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>
+                                (<a href="https://github.com/koaning/simsity/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">16</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/simsity/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">88</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/tokenwiser" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">tokenwiser</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1635362553</span>
+                                <a href="https://github.com/koaning/tokenwiser/releases/tag/0.1.7" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.7</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-10-27T19:22:33Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/3510863?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/203343?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/tokenwiser/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">3</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/tokenwiser/workflows/Python%20package/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">653</span>
+                                <a href="https://pepy.tech/badge/tokenwiser">
+                                    <img src="https://pepy.tech/badge/tokenwiser/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/tokenwiser/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">6</a>
+                                (<a href="https://github.com/koaning/tokenwiser/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">30</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/tokenwiser/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/tokenwiser/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">29</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/tokenwiser/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">51</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/drawdata" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">drawdata</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1637505865</span>
+                                <a href="https://github.com/koaning/drawdata/releases/tag/0.1.0" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.0</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-11-21T14:44:25Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/9258253?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/drawdata/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="#" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">2474</span>
+                                <a href="https://pepy.tech/badge/drawdata">
+                                    <img src="https://pepy.tech/badge/drawdata/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/drawdata/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>
+                                (<a href="https://github.com/koaning/drawdata/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">3</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/drawdata/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/drawdata/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/drawdata/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">473</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/clumper" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">clumper</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1637505910</span>
+                                <a href="https://github.com/koaning/clumper/releases/tag/0.2.15" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.2.15</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-11-21T14:45:10Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/47146983?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/25709809?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/589279?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/21189155?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/clumper/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">5</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/clumper/workflows/Code%20Checks/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">2499</span>
+                                <a href="https://pepy.tech/badge/clumper">
+                                    <img src="https://pepy.tech/badge/clumper/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/clumper/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">9</a>
+                                (<a href="https://github.com/koaning/clumper/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">45</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/clumper/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>
+                                (<a href="https://github.com/koaning/clumper/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">52</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/clumper/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">104</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/memo" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">memo</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1622629985</span>
+                                <a href="https://github.com/koaning/memo/releases/tag/0.2.1" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.2.1</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-06-02T10:33:05Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/5570380?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/702580?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/memo/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">3</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/memo/workflows/Python%20package/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">1416</span>
+                                <a href="https://pepy.tech/badge/memo">
+                                    <img src="https://pepy.tech/badge/memo/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/memo/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>
+                                (<a href="https://github.com/koaning/memo/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">9</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/memo/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>
+                                (<a href="https://github.com/koaning/memo/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">26</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/memo/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">78</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/mktestdocs" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">mktestdocs</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1628184090</span>
+                                <a href="https://github.com/koaning/mktestdocs/releases/tag/0.1.2" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.2</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-08-05T17:21:30Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/21140791?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/mktestdocs/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/mktestdocs/workflows/Python%20package/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">417</span>
+                                <a href="https://pepy.tech/badge/mktestdocs">
+                                    <img src="https://pepy.tech/badge/mktestdocs/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/mktestdocs/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/mktestdocs/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/mktestdocs/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/mktestdocs/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">6</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/mktestdocs/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">44</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    koaning/<span class="font-medium"><a href="https://github.com/koaning/pytest-duration-insights" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">pytest-duration-insights</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1624654574</span>
+                                <a href="https://github.com/koaning/pytest-duration-insights/releases/tag/0.1.1" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.1.1</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-06-25T20:56:14Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/koaning/pytest-duration-insights/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">1</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/koaning/pytest-duration-insights/workflows/pages-build-deployment/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">485</span>
+                                <a href="https://pepy.tech/badge/pytest-duration-insights">
+                                    <img src="https://pepy.tech/badge/pytest-duration-insights/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/koaning/pytest-duration-insights/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>
+                                (<a href="https://github.com/koaning/pytest-duration-insights/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">4</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/koaning/pytest-duration-insights/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0</a>
+                                (<a href="https://github.com/koaning/pytest-duration-insights/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">2</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/pytest-duration-insights/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">34</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                        <tr class="border-b border-gray-200 even:bg-gray-50 hover:bg-gray-100">
+                            <td class="py-3 px-6 text-left"> <!--  whitespace-nowrap -->
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                                    </div>
+                                    godatadriven/<span class="font-medium"><a href="https://github.com/godatadriven/evol" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">evol</a></span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">
+                                <!-- insert hidden date so tablesorter works -->
+                                <span class="hidden">1637505955</span>
+                                <a href="https://github.com/godatadriven/evol/releases/tag/0.5.2" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">0.5.2</a> 
+                                <span class="italic">(<div class="timeago inline" datetime="2021-11-21T14:45:55Z"></div>)</span>
+                            </td>
+                            <!-- <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <img class="w-6 h-6 rounded-full" src="https://randomuser.me/api/portraits/men/1.jpg"/>
+                                    </div>
+                                    <span>Eshal Rosas</span>
+                                </div>
+                            </td> -->
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center justify-center">
+                                    <!-- Only first 8 contributors -->
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/11784324?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1019791?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/4087309?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/1134248?v=4"/>
+                                    
+                                        <img class="w-6 h-6 rounded-full border-gray-200 border -m-1 transform hover:scale-125" src="https://avatars.githubusercontent.com/u/3777585?v=4"/>
+                                    
+                                    <span class="w-3"></span>
+                                    (<a href="https://github.com/godatadriven/evol/contributors" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">5</a>)
+                                    
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <img src="https://github.com/godatadriven/evol/workflows/Build%20Failed/badge.svg" />
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <!-- Download number hidden but there to make sure tablesorter works -->
+                                <span class="hidden">1048</span>
+                                <a href="https://pepy.tech/badge/evol">
+                                    <img src="https://pepy.tech/badge/evol/month" />
+                                </a>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <a href="https://github.com/godatadriven/evol/issues?q=is%3Aissue+is%3Aopen" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">10</a>
+                                (<a href="https://github.com/godatadriven/evol/issues?q=is%3Aissue" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">58</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">  
+                                <a href="https://github.com/godatadriven/evol/pulls?q=is%3Aopen+is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">4</a>
+                                (<a href="https://github.com/godatadriven/evol/pulls?q=is%3Apr" class="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">103</a>)
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <div class="mr-2">
+                                        <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279-7.416-3.967-7.417 3.967 1.481-8.279-6.064-5.828 8.332-1.151z"/></svg> -->
+                                        <img src="img/star.png" style="width: 15px">
+                                    </div>
+                                    <a href="https://github.com/timvink/evol/stargazers" class="hover:underline text-blue-600 hover:text-blue-800 visited:text-purple-600">160</a>
+                                </div>
+                            </td>
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+                Last updated <span class="timeago inline" datetime="2022-01-21T05:40:41Z"></span>.
+                Source code at <a href="https://github.com/koaning/project-monitor" class = "hover:underline text-blue-400 hover:text-blue-500 visited:text-purple-400">timvink/project-monitor</a>.
+            </p>
+        </div>
+    </div>
+</div>
+      
+</body>
+
+</html>
